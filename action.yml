@@ -1,0 +1,15 @@
+name: "Bundler Minifier Action"
+description: "A Github Action that works like Bundler Minifier into Visual Studio."
+branding:
+    icon: package
+    color: blue
+inputs:
+  bundle_config_file:
+    description: 'bundleconfig.json'
+    required: false 
+  search_extensions:
+    description: 'js|css|html'
+    required: false 
+runs:
+    using: "node12"
+    main: "index.js"
