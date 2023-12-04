@@ -13,17 +13,30 @@ try {
         generate.Process({
             bundle_config_folder,
             search_extensions,
+            progress: (result) => {
+                console.info(result)
+            },
         })
-        core.setOutput('The bundleconfig.json was generated!')
+        console.info('The bundleconfig.json was generated!')
     }
 
-    minify.Process()
-    core.setOutput('All files minified!')
+    minify.Process({
+        bundle_config_folder,
+        progress: (result) => {
+            console.info(result)
+        },
+    })
+    console.info('All files minified!')
 
     if (delete_input_files) {
-        clean.Process()
-        core.setOutput('Bundle config input files deleted!')
+        clean.Process({
+            bundle_config_folder,
+            progress: (result) => {
+                console.info(`Deleted `, result)
+            },
+        })
+        core.info('All files non minified was deleted!')
     }
 } catch (error) {
-    core.setFailed(error.message)
+    console.error(error.message)
 }
