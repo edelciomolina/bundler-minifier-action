@@ -105,3 +105,4 @@ dist
 
 # Project Files
 bundleconfig.json
+test/**/*.min*
