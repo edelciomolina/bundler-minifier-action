@@ -4,12 +4,23 @@ branding:
     icon: package
     color: blue
 inputs:
-  bundle_config_file:
-    description: 'bundleconfig.json'
-    required: false 
-  search_extensions:
-    description: 'js|css|html'
-    required: false 
+    bundle_config_folder:
+        description: "Path for bundleconfig (Default: ./test)"
+        required: false
+
+    create_bundle_config:
+        description: "Use search_extensions inputs to search and create a bindleconfig.json automatically (Default: true)"
+        default: "true"
+        required: false
+
+    search_extensions:
+        description: "Which files will be minified (Default: js|css|html)"
+        required: false
+
+    delete_input_files:
+        description: "Delete inputFiles from source project (Default: true)"
+        default: "true"
+        required: false
 runs:
     using: "node12"
     main: "index.js"

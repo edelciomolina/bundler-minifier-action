@@ -1,96 +1,29 @@
-const core = require('@actions/core');
-const fs = require("fs");
-const path = require("path");
+const core = require('@actions/core')
+const generate = require('./lib/generate.js')
+const minify = require('./lib/minify.js')
+const clean = require('./lib/clean.js')
 
-const outputFile = core.getInput('bundle_config_file') || path.join(rootDir, "bundleconfig.json"); // Caminho para o arquivo de saída
-const rootDir = process.cwd(); // Diretório raiz
-const searchExtensions = core.getInput('search_extensions') || [".js", ".css", ".html"]; // Extensões dos arquivos a serem procurados
-
-// Função recursiva para percorrer a pasta
-function processDirectory(directory) {
-  const files = fs.readdirSync(directory);
-
-  files.forEach((file) => {
-    const filePath = path.join(directory, file);
-    const fileExtension = path.extname(file);
-
-    if (fs.statSync(filePath).isDirectory()) {
-      processDirectory(filePath); // Se for um diretório, chama recursivamente a função
-    } else if (shouldProcessFile(filePath, fileExtension)) {
-      const outputFileName = normalizePath(filePath)
-        .replace(".js", ".min.js")
-        .replace(".css", ".min.css")
-        .replace(".html", ".min.html");
-      const inputFiles = [normalizePath(filePath)];
-      const obj = createBundleObject(outputFileName, inputFiles, fileExtension);
-
-      // Escreve o objeto no arquivo bundleconfig.json
-      appendObjectToFile(JSON.stringify(obj, null, "\t") + ",\n");
-    }
-  });
-}
-
-// Verifica se o arquivo deve ser processado
-function shouldProcessFile(file, fileExtension) {
-  const isMinified = file.includes(".min.");
-  const isObjFolder = file.includes("\\obj");
-  const isBinFolder = file.includes("\\bin");
-  const isPlayFolder = file.includes("\\play");
-  const isAssetsFolder = file.includes("\\assets");
-  return (
-    searchExtensions.includes(fileExtension) && //
-    !isMinified &&
-    !isObjFolder &&
-    !isBinFolder &&
-    !isPlayFolder &&
-    !isAssetsFolder
-  );
-}
-
-// Obtém o nome do arquivo de saída relativo ao diretório raiz
-function normalizePath(filePath) {
-  let ret = filePath //
-    .replace(rootDir, "")
-    .replace(/\\/g, "/");
-  return ret.substring(1);
-}
-
-// Cria o objeto bundle correspondente ao arquivo
-function createBundleObject(outputFileName, inputFiles, fileExtension) {
-  const obj = {
-    outputFileName,
-    inputFiles,
-  };
-
-  if (fileExtension === ".html") {
-    obj.minify = {
-      enabled: true,
-      collapseBooleanAttributes: false,
-      removeQuotedAttributes: false,
-    };
-  }
-
-  return obj;
-}
-
-// Escreve o objeto no arquivo bundleconfig.json
-function appendObjectToFile(str) {
-  fs.appendFileSync(outputFile, str);
-}
-
-// Função principal
-function generateBundleConfig() {
-  fs.writeFileSync(outputFile, ""); // Limpa o conteúdo do arquivo de saída
-
-  appendObjectToFile("[\n");
-  processDirectory(rootDir);
-  appendObjectToFile("]\n");
-
-  core.setOutput("bundleconfig.json criado com sucesso!")
-}
+const bundle_config_folder = core.getInput('bundle_config_folder') || './test'
+const search_extensions = core.getInput('search_extensions') || ['.js', '.css', '.html']
+const delete_input_files = (core.getInput('delete_input_files') || 'true') === 'true'
+const create_bundle_config = core.getInput('create_bundle_config') || true
 
 try {
-  generateBundleConfig();
+    if (create_bundle_config) {
+        generate.Process({
+            bundle_config_folder,
+            search_extensions,
+        })
+        core.setOutput('The bundleconfig.json was generated!')
+    }
+
+    minify.Process()
+    core.setOutput('All files minified!')
+
+    if (delete_input_files) {
+        clean.Process()
+        core.setOutput('Bundle config input files deleted!')
+    }
 } catch (error) {
-  core.setFailed(error.message)
+    core.setFailed(error.message)
 }
