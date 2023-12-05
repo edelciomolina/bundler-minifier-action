@@ -27,8 +27,9 @@ inputs:
 runs:
     using: "composite"
     steps:
-        - name: Build & Run
+        - name: NPM Install Dependencies
           shell: bash
-          run: |
-              npm install;
-              node index.js;
+          run: npm install
+        - name: Run Bundler Minifier Action
+          shell: bash
+          run: node index.js;
