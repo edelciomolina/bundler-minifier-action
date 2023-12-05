@@ -1,0 +1,24 @@
+name: Beta💦
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: "Build & Deploy"
+    runs-on: windows-2019
+
+    steps:
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "10.x"
+
+      - name: Bundler Minifier Action
+        uses: edelciomolina/bundler-minifier-action@main
+        with:
+          bundle_config_folder: SimplificaCI\Projects\secure\web
+          create_bundle_config: true
+          search_extensions: "js|css|html"
+          delete_input_files: true
