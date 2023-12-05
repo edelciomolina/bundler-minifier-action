@@ -18,7 +18,7 @@ jobs:
       - name: Bundler Minifier Action
         uses: edelciomolina/bundler-minifier-action@main
         with:
-          bundle_config_folder: SimplificaCI\Projects\secure\web
+          bundle_config_folder: ./test
           create_bundle_config: true
           search_extensions: "js|css|html"
           delete_input_files: true
