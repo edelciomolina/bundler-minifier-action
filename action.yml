@@ -36,7 +36,10 @@ runs:
           shell: bash
           run: |
               echo "💠 You are here: $(pwd)";
-              ls -ls;
+              ls;
+              echo "xxxx";
+              cd ..; ls;
+              echo "xxxx";
               npm install;
 
         - name: Run Bundler Minifier Action
