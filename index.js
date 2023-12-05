@@ -9,39 +9,39 @@ const delete_input_files = (core.getInput('delete_input_files') || 'true') === '
 const create_bundle_config = (core.getInput('create_bundle_config') || 'true') === 'true'
 
 try {
-    core.info(`bundle_config_folder: ${bundle_config_folder}`)
-    core.info(`search_extensions: ${search_extensions}`)
-    core.info(`delete_input_files: ${delete_input_files}`)
-    core.info(`create_bundle_config: ${create_bundle_config}`)
+    core.info(` - bundle_config_folder: ${bundle_config_folder}`)
+    core.info(` - create_bundle_config: ${create_bundle_config}`)
+    core.info(` - search_extensions: ${search_extensions}`)
+    core.info(` - delete_input_files: ${delete_input_files}`)
 
     if (create_bundle_config) {
         generate.Process({
             bundle_config_folder,
             search_extensions,
             progress: (result) => {
-                console.info(result)
+                core.info(result)
             },
         })
-        console.info('The bundleconfig.json was generated!')
+        core.info('The bundleconfig.json was generated!')
     }
 
     minify.Process({
         bundle_config_folder,
         progress: (result) => {
-            console.info(result)
+            core.log(result)
         },
     })
-    console.info('All files minified!')
+    core.info('All files minified!')
 
     if (delete_input_files) {
         clean.Process({
             bundle_config_folder,
             progress: (result) => {
-                console.info(`Deleted `, result)
+                core.log(`Deleted `, result)
             },
         })
         core.info('All files non minified was deleted!')
     }
 } catch (error) {
-    console.error(error.message)
+    core.error(error.message)
 }
