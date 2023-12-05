@@ -29,10 +29,8 @@ runs:
     steps:
         - name: NPM Install Dependencies
           shell: bash
-          working-directory: bundler-minifier-action
           run: npm install
 
         - name: Run Bundler Minifier Action
-          working-directory: bundler-minifier-action
           shell: bash
           run: node index.js;
