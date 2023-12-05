@@ -1,4 +1,4 @@
-name: Beta💦
+name: Test💦
 on:
   push:
     branches:
@@ -10,16 +10,17 @@ jobs:
     runs-on: windows-2019
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           ref: main
 
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: "10.x"
+          node-version: "18.x"
 
-      - name: Bundler Minifier Action
+      - name: Bundler Minifier
         uses: edelciomolina/bundler-minifier-action@main
         with:
           bundle_config_folder: ./test
