@@ -4,6 +4,11 @@ branding:
     icon: package
     color: blue
 inputs:
+    working_directory:
+        description: "Working Directory (Default: ./)"
+        default: "./"
+        required: false
+
     bundle_config_folder:
         description: "Path for bundleconfig (Default: ./test)"
         default: "./test"
@@ -29,8 +34,12 @@ runs:
     steps:
         - name: NPM Install Dependencies
           shell: bash
-          run: npm install
+          working-directory: ${{ inputs.working_directory }}
+          run: |
+              echo "You are here: ${{ inputs.working_directory }}"
+              npm install;
 
         - name: Run Bundler Minifier Action
           shell: bash
+          working-directory: ${{ inputs.working_directory }}
           run: node index.js;
