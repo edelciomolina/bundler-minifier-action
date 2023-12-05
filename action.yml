@@ -23,6 +23,13 @@ inputs:
         description: "Delete inputFiles from source project (Default: true)"
         default: "true"
         required: false
+
 runs:
-    using: "node12"
-    main: "index.js"
+    using: "composite"
+    steps:
+        - name: Build & Run
+          shell: bash
+          run: |
+              npm install
+              node index.js
+              "
