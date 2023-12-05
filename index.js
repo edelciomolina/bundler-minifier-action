@@ -9,6 +9,7 @@ const delete_input_files = (core.getInput('delete_input_files') || 'true') === '
 const create_bundle_config = (core.getInput('create_bundle_config') || 'true') === 'true'
 
 try {
+    core.info(`➡ Input Parameters`)
     core.info(` - bundle_config_folder: ${bundle_config_folder}`)
     core.info(` - create_bundle_config: ${create_bundle_config}`)
     core.info(` - search_extensions: ${search_extensions}`)
@@ -19,28 +20,28 @@ try {
             bundle_config_folder,
             search_extensions,
             progress: (result) => {
-                core.info(result)
+                core.info(` - Processed ${result}`)
             },
         })
-        core.info('The bundleconfig.json was generated!')
+        core.info('➡ The bundleconfig.json was generated!')
     }
 
     minify.Process({
         bundle_config_folder,
         progress: (result) => {
-            core.log(result)
+            core.info(result)
         },
     })
-    core.info('All files minified!')
+    core.info('➡ All files minified!')
 
     if (delete_input_files) {
         clean.Process({
             bundle_config_folder,
             progress: (result) => {
-                core.log(`Deleted `, result)
+                core.info(` - Deleted ${result}`)
             },
         })
-        core.info('All files non minified was deleted!')
+        core.info('➡ All files non minified was deleted!')
     }
 } catch (error) {
     core.error(error.message)
