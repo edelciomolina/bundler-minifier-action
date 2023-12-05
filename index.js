@@ -4,9 +4,9 @@ const minify = require('./lib/minify.js')
 const clean = require('./lib/clean.js')
 
 const bundle_config_folder = core.getInput('bundle_config_folder') || './test'
-const search_extensions = core.getInput('search_extensions') || ['.js', '.css', '.html']
+const search_extensions = ('.' + (core.getInput('search_extensions') || 'js|css|html').split('|').join(',.')).split(',')
 const delete_input_files = (core.getInput('delete_input_files') || 'true') === 'true'
-const create_bundle_config = core.getInput('create_bundle_config') || true
+const create_bundle_config = (core.getInput('create_bundle_config') || 'true') === 'true'
 
 try {
     if (create_bundle_config) {

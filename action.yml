@@ -6,6 +6,7 @@ branding:
 inputs:
     bundle_config_folder:
         description: "Path for bundleconfig (Default: ./test)"
+        default: "./test"
         required: false
 
     create_bundle_config:
@@ -15,6 +16,7 @@ inputs:
 
     search_extensions:
         description: "Which files will be minified (Default: js|css|html)"
+        default: "js|css|html"
         required: false
 
     delete_input_files:
