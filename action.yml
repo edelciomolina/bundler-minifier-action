@@ -35,7 +35,8 @@ runs:
         - name: NPM Install Dependencies
           shell: bash
           run: |
-              echo "💠 You are here: $(pwd)"
+              echo "💠 You are here: $(pwd)";
+              ls -ls;
               npm install;
 
         - name: Run Bundler Minifier Action
