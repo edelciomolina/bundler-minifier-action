@@ -9,6 +9,8 @@ const delete_input_files = (core.getInput('delete_input_files') || 'true') === '
 const create_bundle_config = (core.getInput('create_bundle_config') || 'true') === 'true'
 
 try {
+    core.info(`✅ You are here "${process.cwd()}"`)
+
     core.info(`✅ Input Parameters`)
     core.info(` - bundle_config_folder: ${bundle_config_folder}`)
     core.info(` - create_bundle_config: ${create_bundle_config}`)
