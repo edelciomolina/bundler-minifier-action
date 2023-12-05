@@ -34,10 +34,12 @@ runs:
     steps:
         - name: NPM Install Dependencies
           shell: bash
+          working-directory: ./bundler-minifier-action
           run: |
               echo "💠 You are here: $(pwd)"
               npm install;
 
         - name: Run Bundler Minifier Action
+          working-directory: ./bundler-minifier-action
           shell: bash
           run: node index.js;
