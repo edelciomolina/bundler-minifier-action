@@ -10,6 +10,10 @@ jobs:
     runs-on: windows-2019
 
     steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
