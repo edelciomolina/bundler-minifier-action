@@ -32,4 +32,3 @@ runs:
           run: |
               npm install
               node index.js
-              "
