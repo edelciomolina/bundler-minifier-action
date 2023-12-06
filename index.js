@@ -4,13 +4,11 @@ const minify = require('./lib/minify.js')
 const clean = require('./lib/clean.js')
 
 const args = process.argv.slice(2)
-const workingDirectory = args[args.indexOf('--working-directory') + 1]
 const bundleConfigFolder = args[args.indexOf('--bundle-config-folder') + 1]
 const createBundleConfig = args[args.indexOf('--create-bundle-config') + 1]
 const searchExtensions = args[args.indexOf('--search-extensions') + 1]
 const deleteInputFiles = args[args.indexOf('--delete-input-files') + 1]
 
-const working_directory = workingDirectory || './'
 const bundle_config_folder = bundleConfigFolder || './test'
 const search_extensions = ('.' + (searchExtensions || 'js|css|html').split('|').join(',.')).split(',')
 const delete_input_files = (deleteInputFiles || 'true') === 'true'

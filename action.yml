@@ -37,26 +37,29 @@ runs:
           with:
               node-version: 18
 
-        - name: 🔰 Clone This Action
+        - name: 🔰 Running Path
+          shell: bash
+          working-directory: bundler-minifier-action
+          run: |
+              echo "💠 You are here: $(pwd)";
+
+        - name: 🔰 Cloning This Action
           uses: actions/checkout@master
           with:
               repository: edelciomolina/bundler-minifier-action
               path: bundler-minifier-action
 
-        - name: 🔰 NPM Install Dependencies
+        - name: 🔰 Installing Dependencies
           shell: bash
           working-directory: bundler-minifier-action
           run: |
               echo "💠 You are here: $(pwd)";
               npm install;
 
-        - name: 🔰 Run Bundler Minifier Action
+        - name: 🔰 Running Bundler Minifier
           shell: bash
-          working-directory: bundler-minifier-action
           run: |
-              echo "💠 You are here: $(pwd)";
-              node index.js \
-                --working-directory "${{ inputs.working_directory }}" \
+              node ./bundler-minifier-action/index.js \ 
                 --bundle-config-folder "${{ inputs.bundle_config_folder }}" \
                 --create-bundle-config "${{ inputs.create_bundle_config }}" \
                 --search-extensions "${{ inputs.search_extensions }}" \
