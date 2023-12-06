@@ -10,6 +10,12 @@ const createBundleConfigIndex = args.indexOf('--create-bundle-config')
 const searchExtensionsIndex = args.indexOf('--search-extensions')
 const deleteInputFilesIndex = args.indexOf('--delete-input-files')
 
+core.info(`✅ Input Parameters`)
+core.info(` - bundle_config_folder: ${bundleConfigFolderIndex}`)
+core.info(` - create_bundle_config: ${createBundleConfigIndex}`)
+core.info(` - search_extensions: ${searchExtensionsIndex}`)
+core.info(` - delete_input_files: ${deleteInputFilesIndex}`)
+
 const working_directory = workingDirectoryIndex || './'
 const bundle_config_folder = bundleConfigFolderIndex || './test'
 const search_extensions = ('.' + (searchExtensionsIndex || 'js|css|html').split('|').join(',.')).split(',')
