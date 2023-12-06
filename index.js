@@ -3,7 +3,7 @@ const generate = require('./lib/generate.js')
 const minify = require('./lib/minify.js')
 const clean = require('./lib/clean.js')
 
-core.info(`✅ ${process.argv.join(' ')}`)
+core.info(`⏩ ${process.argv.join(' ')}`)
 
 const args = process.argv.slice(2)
 const bundleConfigFolder = args[args.indexOf('--bundle-config-folder') + 1]
@@ -17,7 +17,7 @@ const delete_input_files = (deleteInputFiles || 'true') === 'true'
 const create_bundle_config = (createBundleConfig || 'true') === 'true'
 
 try {
-    core.info(`✅ You are here "${process.cwd()}"`)
+    core.info(`⏩ You are here "${process.cwd()}"`)
 
     core.info(`✅ Input Parameters`)
     core.info(` - bundle_config_folder: ${bundle_config_folder}`)
@@ -26,6 +26,7 @@ try {
     core.info(` - delete_input_files: ${delete_input_files}`)
 
     if (create_bundle_config) {
+        core.info(`⏩ Generate"`)
         generate.Process({
             bundle_config_folder,
             search_extensions,
@@ -36,6 +37,7 @@ try {
         core.info('✅ The bundleconfig.json was generated!')
     }
 
+    core.info(`⏩ Minify"`)
     minify.Process({
         bundle_config_folder,
         progress: (result) => {
@@ -45,6 +47,7 @@ try {
     core.info('✅ All files minified!')
 
     if (delete_input_files) {
+        core.info(`⏩ Clean"`)
         clean.Process({
             bundle_config_folder,
             progress: (result) => {
