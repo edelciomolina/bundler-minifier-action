@@ -41,7 +41,7 @@ runs:
           shell: bash
           working-directory: bundler-minifier-action
           run: |
-              echo "💠 You are here: $(pwd)";
+              echo "RUNNING PATH 💠 $(pwd)";
 
         - name: 🔰 Cloning This Action
           uses: actions/checkout@master
@@ -53,13 +53,14 @@ runs:
           shell: bash
           working-directory: bundler-minifier-action
           run: |
-              echo "💠 You are here: $(pwd)";
+              echo "INSTALLING DEPENDENCIES 💠 $(pwd)";
               npm install;
 
         - name: 🔰 Running Bundler Minifier
           shell: bash
           run: |
-              node ./bundler-minifier-action/index.js \ 
+              echo "RUNNING BUNDLER 💠 $(pwd)";
+              node bundler-minifier-action/index.js \ 
                 --bundle-config-folder "${{ inputs.bundle_config_folder }}" \
                 --create-bundle-config "${{ inputs.create_bundle_config }}" \
                 --search-extensions "${{ inputs.search_extensions }}" \
