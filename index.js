@@ -3,6 +3,8 @@ const generate = require('./lib/generate.js')
 const minify = require('./lib/minify.js')
 const clean = require('./lib/clean.js')
 
+core.info(`✅ ${process.argv.join(' ')}`)
+
 const args = process.argv.slice(2)
 const bundleConfigFolder = args[args.indexOf('--bundle-config-folder') + 1]
 const createBundleConfig = args[args.indexOf('--create-bundle-config') + 1]

@@ -54,7 +54,7 @@ runs:
           shell: bash
           run: |
               echo "RUNNING MINIFIER 💠 $(pwd)";
-              node bundler-minifier-action/index.js \ 
+              node "bundler-minifier-action/index.js" \ 
                 --bundle-config-folder "${{ inputs.bundle_config_folder }}" \
                 --create-bundle-config "${{ inputs.create_bundle_config }}" \
                 --search-extensions "${{ inputs.search_extensions }}" \
