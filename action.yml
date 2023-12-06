@@ -32,25 +32,25 @@ inputs:
 runs:
     using: "composite"
     steps:
-        - name: Setup Node.js
+        - name: 🔰 Setup Node.js
           uses: actions/setup-node@v2
           with:
               node-version: 18
 
-        - name: Clone This Action
+        - name: 🔰 Clone This Action
           uses: actions/checkout@master
           with:
               repository: edelciomolina/bundler-minifier-action
               path: bundler-minifier-action
 
-        - name: NPM Install Dependencies
+        - name: 🔰 NPM Install Dependencies
           shell: bash
           working-directory: bundler-minifier-action
           run: |
               echo "💠 You are here: $(pwd)";
               npm install;
 
-        - name: Run Bundler Minifier Action
+        - name: 🔰 Run Bundler Minifier Action
           shell: bash
           working-directory: bundler-minifier-action
           run: |
