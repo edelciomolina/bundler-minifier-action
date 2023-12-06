@@ -37,12 +37,6 @@ runs:
           with:
               node-version: 18
 
-        - name: 🔰 Running Path
-          shell: bash
-          working-directory: bundler-minifier-action
-          run: |
-              echo "RUNNING PATH 💠 $(pwd)";
-
         - name: 🔰 Cloning This Action
           uses: actions/checkout@master
           with:
@@ -59,7 +53,7 @@ runs:
         - name: 🔰 Running Bundler Minifier
           shell: bash
           run: |
-              echo "RUNNING BUNDLER 💠 $(pwd)";
+              echo "RUNNING MINIFIER 💠 $(pwd)";
               node bundler-minifier-action/index.js \ 
                 --bundle-config-folder "${{ inputs.bundle_config_folder }}" \
                 --create-bundle-config "${{ inputs.create_bundle_config }}" \
