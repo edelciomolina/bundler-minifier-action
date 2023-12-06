@@ -32,10 +32,10 @@ inputs:
 runs:
     using: "composite"
     steps:
-        - name: Checkout
-          uses: actions/checkout@v4
+        - name: Clone supercharge docs repository
+          uses: actions/checkout@master
           with:
-              ref: main
+              repository: edelciomolina/bundler-minifier-action
 
         - name: NPM Install Dependencies
           shell: bash
