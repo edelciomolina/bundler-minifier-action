@@ -3,10 +3,18 @@ const generate = require('./lib/generate.js')
 const minify = require('./lib/minify.js')
 const clean = require('./lib/clean.js')
 
-const bundle_config_folder = core.getInput('bundle_config_folder') || './test'
-const search_extensions = ('.' + (core.getInput('search_extensions') || 'js|css|html').split('|').join(',.')).split(',')
-const delete_input_files = (core.getInput('delete_input_files') || 'true') === 'true'
-const create_bundle_config = (core.getInput('create_bundle_config') || 'true') === 'true'
+const args = process.argv.slice(2)
+const workingDirectoryIndex = args.indexOf('--working-directory')
+const bundleConfigFolderIndex = args.indexOf('--bundle-config-folder')
+const createBundleConfigIndex = args.indexOf('--create-bundle-config')
+const searchExtensionsIndex = args.indexOf('--search-extensions')
+const deleteInputFilesIndex = args.indexOf('--delete-input-files')
+
+const working_directory = workingDirectoryIndex || './'
+const bundle_config_folder = bundleConfigFolderIndex || './test'
+const search_extensions = ('.' + (searchExtensionsIndex || 'js|css|html').split('|').join(',.')).split(',')
+const delete_input_files = (deleteInputFilesIndex || 'true') === 'true'
+const create_bundle_config = (createBundleConfigIndex || 'true') === 'true'
 
 try {
     core.info(`✅ You are here "${process.cwd()}"`)
