@@ -35,12 +35,12 @@ According to the input parameters provided to this Action, it will, in order, pr
 
 ## Inputs
 
-| Key                    | Required | Default       | Description                                                                          |
-| ---------------------- | -------- | ------------- | ------------------------------------------------------------------------------------ |
-| `bundle_config_folder` | no       | ./test        | Path for bundleconfig.                                                               |
-| `create_bundle_config` | no       | true          | Use search_extensions inputs to search and create a bindleconfig.json automatically. |
-| `search_extensions`    | no       | js\|css\|html | Which files will be minified.                                                        |
-| `delete_input_files`   | no       | true          | Delete inputFiles from source project.                                               |
+| Key                  | Required | Default       | Description                                                                          |
+| :------------------- | :------- | :------------ | :----------------------------------------------------------------------------------- |
+| bundle_config_folder | no       | ./test        | Path for bundleconfig.                                                               |
+| create_bundle_config | no       | true          | Use search_extensions inputs to search and create a bindleconfig.json automatically. |
+| search_extensions    | no       | js\|css\|html | Which files will be minified.                                                        |
+| delete_input_files   | no       | true          | Delete inputFiles from source project.                                               |
 
 ## Example Usage
 
