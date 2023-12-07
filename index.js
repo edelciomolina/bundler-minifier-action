@@ -44,7 +44,7 @@ try {
             core.info(result)
         },
     })
-    core.info(' ✅ All files minified!')
+    core.info('✅ All files minified!')
 
     if (delete_input_files) {
         core.info(`⏩ Clean ...`)
